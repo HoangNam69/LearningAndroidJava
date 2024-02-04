@@ -5,22 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".ChildActivity">
 
     <TextView
-        android:id="@+id/txvTitle"
+        android:id="@+id/txvTitleChildActivity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#009688"
-        android:text="This is MainActivity"
+        android:height="50dp"
+        android:background="#0D0C0C"
+        android:text="This is ChildACtivity"
         android:textAlignment="center"
-        android:textColor="#CDDC39"
-        android:textSize="34sp" />
+        android:textColor="#E91E63"
+        android:textSize="34sp"
+
+        />
 
     <Button
-        android:id="@+id/btnOpen"
-        android:layout_width="228dp"
+        android:id="@+id/btnBack"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Open Child Activity" />
+        android:text="Back" />
+
 </LinearLayout>
