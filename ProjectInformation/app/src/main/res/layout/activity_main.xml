@@ -23,9 +23,8 @@
         android:id="@+id/tlInfor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:stretchColumns="*"
         android:padding="10dp"
-        >
+        android:stretchColumns="*">
 
         <TableRow
             android:id="@+id/trFullname"
@@ -174,10 +173,8 @@
         android:id="@+id/btnSend"
         android:layout_width="211dp"
         android:layout_height="wrap_content"
-        android:text="GỬI THÔNG TIN"
         android:layout_gravity="center"
-        />
-
+        android:text="GỬI THÔNG TIN" />
 
 
 </LinearLayout>

@@ -1,12 +1,15 @@
 package hoangnam.projectinformation;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -30,12 +33,13 @@ public class MainActivity extends AppCompatActivity {
         chbCode = findViewById(R.id.chbCode);
         edtAdditionalInfor = findViewById(R.id.edtMultiLineAdditionalnfor);
         btnSend = findViewById(R.id.btnSend);
+
 //        Xử lý sự kiện
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//               Lấy họ và tên, kiểm tra
                 String fullName = edtFullname.getText().toString();
-
                 if (fullName.isEmpty()) {
                     Toast.makeText(MainActivity.this, "Vui lòng nhập họ tên", Toast.LENGTH_SHORT).show();
 //                    edtFullname.setError("Vui lòng nhập họ tên");
@@ -43,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
 
+//                Lấy số căn cước công dân, kiểm tra
                 String identify = edtIdentify.getText().toString();
-
                 if (identify.isEmpty()) {
                     Toast.makeText(MainActivity.this, "Vui lòng nhập số căn cước công dân", Toast.LENGTH_SHORT).show();
                     edtIdentify.requestFocus();
@@ -56,17 +60,12 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
 
-                String additionalInfor = edtAdditionalInfor.getText().toString();
-                String certificate = "";
+//                Lấy id của radio button được chọn
+                int idCertificate = rgCertifycate.getCheckedRadioButtonId();
+                RadioButton rbSelected = findViewById(idCertificate); // Tìm ra radio button được chọn
+                String certificate = rbSelected.getText().toString();
 
-                if (rgCertifycate.getCheckedRadioButtonId() == R.id.rbIntermediateLevel) {
-                    certificate = "Trung cấp";
-                } else if (rgCertifycate.getCheckedRadioButtonId() == R.id.rbCollege) {
-                    certificate = "Cao đẳng";
-                } else if (rgCertifycate.getCheckedRadioButtonId() == R.id.rbUniversity) {
-                    certificate = "Đại học";
-                }
-
+//                Lấy sở thích được chọn
                 String hobby = "";
                 if (chbReadBook.isChecked()) {
                     hobby += chbReadBook.getText().toString() + " ";
@@ -76,7 +75,25 @@ public class MainActivity extends AppCompatActivity {
                     hobby += chbCode.getText().toString() + " ";
                 }
 
+                String additionalInfor = edtAdditionalInfor.getText().toString();
 
+                String popup = "Họ và tên: " + fullName + "\n" +
+                        "Số căn cước công dân: " + identify + "\n" +
+                        "Bằng cấp: " + certificate + "\n" +
+                        "Sở thích: " + hobby + "\n" +
+                        "Thông tin bổ sung: " + additionalInfor;
+
+//                Tạo Dialog thông báo
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setTitle("Thông tin cá nhân");
+                builder.setMessage(popup);
+                builder.setPositiveButton("Đóng", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                builder.create().show();
             }
         });
     }
